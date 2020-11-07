@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "parcel index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,9 @@
   },
   "homepage": "https://github.com/phongluudn1997/forkify#readme",
   "devDependencies": {
-    "parcel": "^2.0.0-beta.1"
+    "@parcel/transformer-css": "^2.0.0-alpha.3",
+    "@parcel/transformer-postcss": "^2.0.0-alpha.3",
+    "parcel": "^2.0.0-beta.1",
+    "sass": "^1.29.0"
   }
 }
