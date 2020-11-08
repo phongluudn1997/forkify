@@ -1,6 +1,7 @@
 import { state, fetchRecipe, querySearch } from "./model";
 import recipeView from "./views/recipeView";
 import searchView from "./views/searchView";
+import resultsView from "./views/resultsView";
 
 const renderRecipe = async function () {
   console.log("EVENT FIRED");
@@ -20,9 +21,11 @@ const renderRecipe = async function () {
 
 const queryRecipe = async function () {
   try {
+    resultsView.renderSpinner();
     const query = searchView.getQuery();
     if (!query) return;
     await querySearch(query);
+    resultsView.render(state.search.results);
   } catch (error) {
     console.log(error);
   }
