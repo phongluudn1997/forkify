@@ -19,8 +19,13 @@ const renderRecipe = async function () {
 };
 
 const queryRecipe = async function () {
-  const query = searchView.getQuery();
-  await querySearch(query);
+  try {
+    const query = searchView.getQuery();
+    if (!query) return;
+    await querySearch(query);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const init = function () {
