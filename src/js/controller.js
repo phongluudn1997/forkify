@@ -1,7 +1,8 @@
-import { state, fetchRecipe, querySearch } from "./model";
+import { state, fetchRecipe, querySearch, getSearchResultsPage } from "./model";
 import recipeView from "./views/recipeView";
 import searchView from "./views/searchView";
 import resultsView from "./views/resultsView";
+import paginationView from "./views/paginationView";
 
 const renderRecipe = async function () {
   console.log("EVENT FIRED");
@@ -25,15 +26,23 @@ const queryRecipe = async function () {
     const query = searchView.getQuery();
     if (!query) return;
     await querySearch(query);
-    resultsView.render(state.search.results);
+    resultsView.render(getSearchResultsPage());
+    paginationView.render(state.search);
   } catch (error) {
     console.log(error);
   }
 };
 
+const paginationControl = function (gotoPage) {
+  state.search.currentPage = gotoPage;
+  resultsView.render(getSearchResultsPage());
+  paginationView.render(state.search);
+};
+
 const init = function () {
   recipeView.addHandlerRender(renderRecipe);
   searchView.addHandlerSearch(queryRecipe);
+  paginationView.handleChangePage(paginationControl);
 };
 
 init();
