@@ -2,6 +2,7 @@ import { state, fetchRecipe } from "./model";
 import recipeView from "./views/recipeView";
 
 const renderRecipe = async function () {
+  console.log("EVENT FIRED");
   try {
     const id = window.location.hash.slice(1);
     if (!id) return;
@@ -16,5 +17,8 @@ const renderRecipe = async function () {
   }
 };
 
-window.addEventListener("hashchange", renderRecipe);
-window.addEventListener("load", renderRecipe);
+const init = function () {
+  recipeView.addHandlerRender(renderRecipe);
+};
+
+init();
