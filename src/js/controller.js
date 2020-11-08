@@ -13,7 +13,7 @@ const renderRecipe = async function () {
 
     recipeView.render(recipe);
   } catch (error) {
-    alert(error);
+    recipeView.renderError();
   }
 };
 
